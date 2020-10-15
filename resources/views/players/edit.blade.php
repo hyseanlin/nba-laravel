@@ -23,6 +23,10 @@
 <body class="antialiased">
 <h1>這是顯示修改一筆球員用的表單的 view </h1>
 
+球員的姓名：{{ $player_name }}<br/>
+球員的國家：{{ $player_country }}<br/>
+球員的位置：{{ $player_position }}<br/>
+
 <a href="teams">回到球員的View</a>
 </body>
 </html>
