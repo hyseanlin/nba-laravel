@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\TeamsController;
+use App\Http\Controllers\PlayersController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,42 +27,14 @@ Route::get('/', function () {
  * 修改表單        teams/{id}/edit          teams.edit
  ----------------------------------------*/
 // 查詢
-Route::get('teams', function () {
-    return view('teams.index');
-});
+Route::get('teams', [TeamsController::class, 'index']);
 // 新增表單
-Route::get('teams/create', function () {
-    return view('teams.create');
-});
+Route::get('teams/create', [TeamsController::class, 'create']);
 // 顯示單筆球隊資料
-Route::get('teams/{id}', function ($id) {
-    $data = [];
-    if ($id == 5)
-    {
-        $data['name'] = "LHU";
-        $data['city'] = "Taoyuang";
-        $data['field'] = "SKY Field";
-    } else {
-        $data['name'] = "NBA Team";
-        $data['city'] = "USA City";
-        $data['field'] = "USA　Field";
-    }
-    return view('teams.show', $data);
-})->where('id', '[0-9]+');
+
+Route::get('teams/{id}', [TeamsController::class, 'show'])->where('id', '[0-9]+');
 // 修改表單
-Route::get('teams/{id}/edit', function ($id) {
-    if ($id == 5)
-    {
-        $team_name = "LHU";
-        $team_city = "Taoyuang";
-        $team_field = "SKY Field";
-    } else {
-        $team_name = "NBA Team";
-        $team_city = "USA City";
-        $team_field = "USA　Field";
-    }
-    return view('teams.edit')->with(['name'=>$team_name, 'city'=>$team_city, 'field'=>$team_field]);
-})->where('id', '[0-9]+');
+Route::get('teams/{id}/edit', [TeamsController::class, 'edit'])->where('id', '[0-9]+');
 
 
 
@@ -74,30 +47,10 @@ Route::get('teams/{id}/edit', function ($id) {
  * 修改表單        players/{id}/edit          players.edit
  ----------------------------------------*/
 // 查詢
-Route::get('players', function () {
-    return view('players.index');
-});
+Route::get('players', [PlayersController::class, 'index']);
 // 新增表單
-Route::get('players/create', function () {
-    return view('players.create');
-});
+Route::get('players/create', [PlayersController::class, 'create']);
 // 顯示單筆球隊資料
-Route::get('players/{id}', function ($id) {
-    return view('players.show')->with('player_id', $id);
-})->where('id', '[0-9]+');
+Route::get('players/{id}', [PlayersController::class, 'show'])->where('id', '[0-9]+');
 // 修改表單
-Route::get('players/{id}/edit', function ($id) {
-    if ($id == 5)
-    {
-        $player_name = "Sean";
-        $player_country = "Taiwan";
-        $player_position = "中鋒";
-    } else {
-        $player_name = "NBA 球員名字";
-        $player_country = "USA";
-        $player_position = "前鋒";
-    }
-    $data = compact('player_name', 'player_country', 'player_position');
-
-    return view('players.edit', $data);
-})->where('id', '[0-9]+');
+Route::get('players/{id}/edit', [PlayersController::class, 'edit'])->where('id', '[0-9]+');
