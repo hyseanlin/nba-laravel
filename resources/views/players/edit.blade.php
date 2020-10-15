@@ -27,6 +27,6 @@
 球員的國家：{{ $player_country }}<br/>
 球員的位置：{{ $player_position }}<br/>
 
-<a href="teams">回到球員的View</a>
+<a href="/players">回到球員的View</a>
 </body>
 </html>

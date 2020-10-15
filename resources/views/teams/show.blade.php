@@ -26,7 +26,7 @@
 球隊所在城市：{{ $city }}<br/>
 球隊主場：{{ $field }}<br/>
 
-<a href="players">回到球隊的View</a>
+<a href="/teams">回到球隊的View</a>
 
 </body>
 </html>

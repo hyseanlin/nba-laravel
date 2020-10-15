@@ -23,6 +23,6 @@
 <body class="antialiased">
 <h1>這是顯示建立一筆球員用的表單的 view </h1>
 
-<a href="teams">回到球員的View</a>
+<a href="/players">回到球員的View</a>
 </body>
 </html>

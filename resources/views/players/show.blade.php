@@ -23,7 +23,7 @@
 <body class="antialiased">
 <h1>這是預備顯示「單一」球員的 view </h1>
 
-<a href="teams">回到球員的View</a>
+<a href="/players">回到球員的View</a>
 
 </body>
 </html>
