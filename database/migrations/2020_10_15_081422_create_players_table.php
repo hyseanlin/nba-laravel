@@ -20,7 +20,7 @@ class CreatePlayersTable extends Migration
             $table->string('position')->comment('位置');
             $table->float('height')->comment('身高');
             $table->float('weight')->comment('體重');
-            $table->tinyInteger('year')->comment('年資');
+            $table->tinyInteger('year')->unsigned()->comment('年資');
             $table->string('nationality')->comment('國籍');
             $table->foreign('tid')
                 ->references('id')
