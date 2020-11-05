@@ -31,6 +31,7 @@
 球員體重：{{ $weight }}<br/>
 球員年資：{{ $year }}<br/>
 球員國籍：{{ $nationality }}<br/>
+
 <a href="/players">回到球員的View</a>
 
 </body>

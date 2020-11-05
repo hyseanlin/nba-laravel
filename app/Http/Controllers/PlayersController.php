@@ -9,54 +9,74 @@ use Illuminate\Http\Request;
 class PlayersController extends Controller
 {
     //
+    public function generateRandomString($length = 10) {
+        $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+    public function generateRandomName() {
+        $first_name = $this->generateRandomString(rand(2, 15));
+        $first_name = strtolower($first_name);
+        $first_name = ucfirst($first_name);
+        $last_name = $this->generateRandomString(rand(2, 15));
+        $last_name = strtolower($last_name);
+        $last_name = ucfirst($last_name);
+        $name = $first_name . " ". $last_name;
+        return $name;
+    }
+    public function generateRandomPosition() {
+        $positions = ['控球後衛', '得分後衛', '後衛', '前鋒', '小前鋒', '大前鋒','中鋒'];
+        return $positions[rand(0, count($positions)-1)];
+
+    }
+
+    public function generateRandomNationality() {
+        $positions = ['美國', '土耳其', '法國', '印度', '非洲', '中國', '塞爾維亞', '英國', '台灣'];
+        return $positions[rand(0, count($positions)-1)];
+
+    }
     public function index()
     {
-        $player = Player::where('height', '>', 178)->first()->toArray();
+        $players = Player::all()->sortBy('id', SORT_ASC);
 
-        return view('players.index', $player);
+        return view('players.index', ['players' => $players]);
     }
 
     public function create()
     {
+        $name = $this->generateRandomName();
+        $position = $this->generateRandomPosition();
+        $nationality = $this->generateRandomNationality();
+        $random_datetime = Carbon::now()->subMinutes(rand(1, 55));
+
         $player = Player::create([
-            'name'=>'陳彥達',
-            'tid'=>3,
-            'position'=>'中鋒',
-            'height'=>180,
-            'weight'=>75,
-            'year'=>12,
-            'nationality'=>'台灣',
-            'created_at'=>Carbon::now(),
-            'updated_at'=>Carbon::now()]);
+            'name'=>$name,
+            'tid'=>rand(1, 25),
+            'position'=>$position,
+            'height'=>rand(165, 220),
+            'weight'=>rand(80, 120),
+            'year'=>rand(1, 15),
+            'nationality'=>$nationality,
+            'created_at'=>$random_datetime,
+            'updated_at'=>$random_datetime]);
 
         return view('players.create', $player->toArray());
     }
 
     public function edit($id)
     {
-        if ($id == 5)
-        {
-            $player_name = "Sean";
-            $player_country = "Taiwan";
-            $player_position = "中鋒";
-        } else {
-            $player_name = "NBA 球員名字";
-            $player_country = "USA";
-            $player_position = "前鋒";
-        }
-        $data = compact('player_name', 'player_country', 'player_position');
+        $player = Player::findOrFail($id)->toArray();
 
-        return view('players.edit', $data);
+        return view('players.edit', $player);
     }
 
     public function show($id)
     {
-        $temp = Player::where('position', '小前鋒')->first();
-        if ($temp == null)
-            return "No record";
-
-        $player = $temp->toArray();
-
+        $player = Player::findOrFail($id)->toArray();
         return view('players.show', $player);
     }
 }

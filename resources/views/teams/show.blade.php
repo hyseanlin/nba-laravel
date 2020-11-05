@@ -22,6 +22,8 @@
 </head>
 <body class="antialiased">
 <h1>這是預備顯示「單一」球隊的 view </h1>
+
+球隊編號：{{ $id }}<br/>
 球隊名字：{{ $name }}<br/>
 球隊所在城市：{{ $city }}<br/>
 球隊分區：{{ $zone }}<br/>
