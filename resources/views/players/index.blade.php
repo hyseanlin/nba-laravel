@@ -23,6 +23,8 @@
 <body class="antialiased">
 <h1>這是預備顯示「所有」球員的 view </h1>
 
+{{ $name }}<br/>
+
 <a href="/teams">回到球隊的View</a>
 </body>
 </html>

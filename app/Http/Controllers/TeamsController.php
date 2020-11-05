@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Team;
 use Illuminate\Http\Request;
 
 class TeamsController extends Controller
@@ -9,43 +9,49 @@ class TeamsController extends Controller
     //
     public function index()
     {
-        return view('teams.index');
+        $n = Team::where('zone', "商學院")->count();
+
+        return $n;//view('teams.index');
     }
 
     public function create()
     {
+        $team = new Team;
+        $team->name = "F728B";
+        $team->zone = "北部";
+        $team->city = "桃園";
+        $team->home = "新莊體育場";
+        $team->save();
+
         return view('teams.create');
 
     }
 
     public function edit($id)
     {
-        if ($id == 5)
-        {
-            $team_name = "LHU";
-            $team_city = "Taoyuang";
-            $team_field = "SKY Field";
-        } else {
-            $team_name = "NBA Team";
-            $team_city = "USA City";
-            $team_field = "USA　Field";
-        }
-        return view('teams.edit')->with(['name'=>$team_name, 'city'=>$team_city, 'field'=>$team_field]);
+        $temp = Team::findOrFail($id);
+        $temp->name = "F727";
+        $temp->save();
+
+        $team = $temp->toArray();
+
+        return view('teams.edit')->with([
+            'name'=>$team['name'],
+            'city'=>$team['city'],
+            'home'=>$team['home'],
+            'zone'=>$team['zone']]);
     }
 
     public function show($id)
     {
-        $data = [];
-        if ($id == 5)
-        {
-            $data['name'] = "LHU";
-            $data['city'] = "Taoyuang";
-            $data['field'] = "SKY Field";
-        } else {
-            $data['name'] = "NBA Team";
-            $data['city'] = "USA City";
-            $data['field'] = "USA　Field";
-        }
-        return view('teams.show', $data);
+        /*
+        $temp = Team::find($id);
+        if ($temp == null)
+            return "No record";
+        */
+        $temp = Team::findOrFail($id);
+
+        $team = $temp->toArray();
+        return view('teams.show', $team);
     }
 }

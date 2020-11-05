@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Player;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PlayersController extends Controller
@@ -9,12 +11,25 @@ class PlayersController extends Controller
     //
     public function index()
     {
-        return view('players.index');
+        $player = Player::where('height', '>', 178)->first()->toArray();
+
+        return view('players.index', $player);
     }
 
     public function create()
     {
-        return view('players.create');
+        $player = Player::create([
+            'name'=>'陳彥達',
+            'tid'=>3,
+            'position'=>'中鋒',
+            'height'=>180,
+            'weight'=>75,
+            'year'=>12,
+            'nationality'=>'台灣',
+            'created_at'=>Carbon::now(),
+            'updated_at'=>Carbon::now()]);
+
+        return view('players.create', $player->toArray());
     }
 
     public function edit($id)
@@ -36,6 +51,12 @@ class PlayersController extends Controller
 
     public function show($id)
     {
-        return view('players.show')->with('player_id', $id);
+        $temp = Player::where('position', '小前鋒')->first();
+        if ($temp == null)
+            return "No record";
+
+        $player = $temp->toArray();
+
+        return view('players.show', $player);
     }
 }

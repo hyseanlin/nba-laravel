@@ -25,7 +25,8 @@
 
 球隊名字：{{ $name }}<br/>
 球隊所在城市：{{ $city }}<br/>
-球隊主場：{{ $field }}<br/>
+球隊所在分區：{{ $zone }}<br/>
+球隊主場：{{ $home }}<br/>
 
 <a href="/teams">回到球隊的View</a>
 </body>
