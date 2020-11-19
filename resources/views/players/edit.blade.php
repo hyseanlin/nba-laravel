@@ -24,6 +24,10 @@
 <h1>這是顯示修改一筆球員用的表單的 view </h1>
 
 
+<a href="<?php echo route('players.index'); ?>" class="ml-1 underline">
+    所有球員
+</a><br/>
+
 球員編號：{{ $id }}<br/>
 球員姓名：{{ $name }}<br/>
 球隊編號：{{ $tid }}<br/>
@@ -33,7 +37,5 @@
 球員年資：{{ $year }}<br/>
 球員國籍：{{ $nationality }}<br/>
 
-
-<a href="/players">回到球員的View</a>
 </body>
 </html>

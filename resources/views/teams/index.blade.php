@@ -394,37 +394,51 @@
     </style>
 </head>
 <body class="antialiased">
-<h1>這是預備顯示「所有」球隊的 view </h1>
+    <h1>這是預備顯示「所有」球隊的 view </h1>
 
-<table>
-    <tr>
-        <th>編號</th>
-        <th>名稱</th>
-        <th>分區</th>
-        <th>所在城市</th>
-        <th>主場</th>
-    </tr>
-    @foreach($teams as $team)
-        @if ($team->zone == '西區')
-        <tr style="color:red;">
-            <td>{{ $team->id }}</td>
-            <td>{{ $team->name }}</td>
-            <td>{{ $team->zone }}</td>
-            <td>{{ $team->city }}</td>
-            <td>{{ $team->home }}</td>
-        </tr>
-        @else
-        <tr style="color:blue;">
-            <td>{{ $team->id }}</td>
-            <td>{{ $team->name }}</td>
-            <td>{{ $team->zone }}</td>
-            <td>{{ $team->city }}</td>
-            <td>{{ $team->home }}</td>
-        </tr>
-        @endif
-    @endforeach
-</table>
+    <a href="<?php echo route('players.index'); ?>" class="ml-1 underline">
+        所有球員
+    </a>
 
-<a href="/players" class="ml-1 underline">回到球員的View</a>
+
+    <a href="<?php echo route('players.create'); ?>" class="ml-1 underline">
+        新增球隊
+    </a><br/>
+
+    <table>
+        <tr>
+            <th>編號</th>
+            <th>名稱</th>
+            <th>分區</th>
+            <th>所在城市</th>
+            <th>主場</th>
+            <th>操作1</th>
+            <th>操作2</th>
+        </tr>
+        @foreach($teams as $team)
+            @if ($team->zone == '西區')
+                <tr style="color:red;">
+                    <td>{{ $team->id }}</td>
+                    <td>{{ $team->name }}</td>
+                    <td>{{ $team->zone }}</td>
+                    <td>{{ $team->city }}</td>
+                    <td>{{ $team->home }}</td>
+                    <td><a href="<?php echo route('teams.show', ['id' => $team->id]);?>">顯示</a></td>
+                    <td><a href="<?php echo route('teams.edit', ['id' => $team->id]);?>">修改</a></td>
+                </tr>
+            @else
+                <tr style="color:blue;">
+                    <td>{{ $team->id }}</td>
+                    <td>{{ $team->name }}</td>
+                    <td>{{ $team->zone }}</td>
+                    <td>{{ $team->city }}</td>
+                    <td>{{ $team->home }}</td>
+                    <td><a href="<?php echo route('teams.show', ['id' => $team->id]);?>">顯示</a></td>
+                    <td><a href="<?php echo route('teams.edit', ['id' => $team->id]);?>">修改</a></td>
+                </tr>
+            @endif
+        @endforeach
+    </table>
+
 </body>
 </html>

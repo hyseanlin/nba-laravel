@@ -396,6 +396,14 @@
 <body class="antialiased">
     <h1>這是預備顯示「所有」球員的 view </h1>
 
+    <a href="<?php echo route('teams.index'); ?>" class="ml-1 underline">
+        所有球隊
+    </a>
+
+    <a href="<?php echo route('players.create'); ?>" class="ml-1 underline">
+        新增球員
+    </a><br/>
+
     <table>
         <tr>
             <th>球員編號</th>
@@ -406,6 +414,8 @@
             <th>體重</th>
             <th>年資</th>
             <th>國籍</th>
+            <th>操作1</th>
+            <th>操作2</th>
         </tr>
         @foreach($players as $player)
             <tr>
@@ -417,12 +427,11 @@
                 <td>{{ $player->weight }}</td>
                 <td>{{ $player->year }}</td>
                 <td>{{ $player->nationality }}</td>
+                <td><a href="<?php echo route('players.show', ['id'=>$player->id]);?>">顯示</a></td>
+                <td><a href="<?php echo route('players.edit', ['id'=>$player->id]);?>">修改</a></td>
             </tr>
         @endforeach
     </table>
 
-    <a href="/teams" class="ml-1 underline">
-        回到球隊的View
-    </a>
 </body>
 </html>

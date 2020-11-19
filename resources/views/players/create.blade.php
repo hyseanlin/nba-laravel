@@ -23,6 +23,9 @@
 <body class="antialiased">
 <h1>這是顯示建立一筆球員用的表單的 view </h1>
 
+<a href="<?php echo route('players.index'); ?>" class="ml-1 underline">
+    所有球員
+</a><br/>
 
 球員編號：{{ $id }}<br/>
 球員姓名：{{ $name }}<br/>
@@ -36,6 +39,5 @@
 
 
 
-<a href="/players">回到球員的View</a>
 </body>
 </html>
