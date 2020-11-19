@@ -22,11 +22,17 @@
 </head>
 <body class="antialiased">
 <h1>這是預備顯示「單一」球隊的 view </h1>
+
+<a href="<?php echo route('teams.index'); ?>" class="ml-1 underline">
+    所有球隊
+</a><br/>
+
+球隊編號：{{ $id }}<br/>
 球隊名字：{{ $name }}<br/>
 球隊所在城市：{{ $city }}<br/>
-球隊主場：{{ $field }}<br/>
+球隊分區：{{ $zone }}<br/>
+球隊主場：{{ $home }}<br/>
 
-<a href="/teams">回到球隊的View</a>
 
 </body>
 </html>

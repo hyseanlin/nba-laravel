@@ -27,14 +27,14 @@ Route::get('/', function () {
  * 修改表單        teams/{id}/edit          teams.edit
  ----------------------------------------*/
 // 查詢
-Route::get('teams', [TeamsController::class, 'index']);
+Route::get('teams', [TeamsController::class, 'index'])->name('teams.index');
 // 新增表單
-Route::get('teams/create', [TeamsController::class, 'create']);
+Route::get('teams/create', [TeamsController::class, 'create'])->name('players.create');
 // 顯示單筆球隊資料
 
-Route::get('teams/{id}', [TeamsController::class, 'show'])->where('id', '[0-9]+');
+Route::get('teams/{id}', [TeamsController::class, 'show'])->where('id', '[0-9]+')->name('teams.show');
 // 修改表單
-Route::get('teams/{id}/edit', [TeamsController::class, 'edit'])->where('id', '[0-9]+');
+Route::get('teams/{id}/edit', [TeamsController::class, 'edit'])->where('id', '[0-9]+')->name('teams.edit');
 
 
 
@@ -47,10 +47,10 @@ Route::get('teams/{id}/edit', [TeamsController::class, 'edit'])->where('id', '[0
  * 修改表單        players/{id}/edit          players.edit
  ----------------------------------------*/
 // 查詢
-Route::get('players', [PlayersController::class, 'index']);
+Route::get('players', [PlayersController::class, 'index'])->name('players.index');
 // 新增表單
-Route::get('players/create', [PlayersController::class, 'create']);
+Route::get('players/create', [PlayersController::class, 'create'])->name('players.create');
 // 顯示單筆球隊資料
-Route::get('players/{id}', [PlayersController::class, 'show'])->where('id', '[0-9]+');
+Route::get('players/{id}', [PlayersController::class, 'show'])->where('id', '[0-9]+')->name('players.show');
 // 修改表單
-Route::get('players/{id}/edit', [PlayersController::class, 'edit'])->where('id', '[0-9]+');
+Route::get('players/{id}/edit', [PlayersController::class, 'edit'])->where('id', '[0-9]+')->name('players.edit');
