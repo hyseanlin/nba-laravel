@@ -22,7 +22,7 @@
 </head>
 <body class="antialiased">
 <h1>這是顯示建立一筆球隊用的表單的 view </h1>
-<a href="<?php echo route('teams.index'); ?>" class="ml-1 underline">
+<a href="{{ route('teams.index')}}" class="ml-1 underline">
     所有球隊
 </a><br/>
 

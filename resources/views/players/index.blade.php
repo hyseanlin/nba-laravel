@@ -396,11 +396,11 @@
 <body class="antialiased">
     <h1>這是預備顯示「所有」球員的 view </h1>
 
-    <a href="<?php echo route('teams.index'); ?>" class="ml-1 underline">
+    <a href="{{ route('teams.index') }}" class="ml-1 underline">
         所有球隊
     </a>
 
-    <a href="<?php echo route('players.create'); ?>" class="ml-1 underline">
+    <a href="route('players.create')" class="ml-1 underline">
         新增球員
     </a><br/>
 
