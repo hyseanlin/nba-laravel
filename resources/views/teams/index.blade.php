@@ -2,9 +2,12 @@
 
 @section('title', '所有球隊')
 
-@section('nba_theme', 'NBA 目前有的球隊')
+@section('nba_theme', 'NBA 所有球隊')
 
 @section('nba_contents')
+    <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
+        <a href="{{ route('teams.create') }} ">新增球隊</a>
+    </div>
     <table>
         <tr>
             <th>編號</th>
@@ -23,8 +26,8 @@
                     <td>{{ $team->zone }}</td>
                     <td>{{ $team->city }}</td>
                     <td>{{ $team->home }}</td>
-                    <td><a href="<?php echo route('teams.show', ['id' => $team->id]);?>">顯示</a></td>
-                    <td><a href="<?php echo route('teams.edit', ['id' => $team->id]);?>">修改</a></td>
+                    <td><a href="{{ route('teams.show', ['id' => $team->id]) }}">顯示</a></td>
+                    <td><a href="{{ route('teams.edit', ['id' => $team->id]) }}">修改</a></td>
                 </tr>
             @else
                 <tr style="color:blue;">
@@ -33,8 +36,8 @@
                     <td>{{ $team->zone }}</td>
                     <td>{{ $team->city }}</td>
                     <td>{{ $team->home }}</td>
-                    <td><a href="<?php echo route('teams.show', ['id' => $team->id]);?>">顯示</a></td>
-                    <td><a href="<?php echo route('teams.edit', ['id' => $team->id]);?>">修改</a></td>
+                    <td><a href="{{ route('teams.show', ['id' => $team->id]) }}">顯示</a></td>
+                    <td><a href="{{ route('teams.edit', ['id' => $team->id]) }}">修改</a></td>
                 </tr>
             @endif
         @endforeach
