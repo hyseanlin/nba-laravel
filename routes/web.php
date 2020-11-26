@@ -29,7 +29,7 @@ Route::get('/', function () {
 // 查詢
 Route::get('teams', [TeamsController::class, 'index'])->name('teams.index');
 // 新增表單
-Route::get('teams/create', [TeamsController::class, 'create'])->name('players.create');
+Route::get('teams/create', [TeamsController::class, 'create'])->name('teams.create');
 // 顯示單筆球隊資料
 
 Route::get('teams/{id}', [TeamsController::class, 'show'])->where('id', '[0-9]+')->name('teams.show');

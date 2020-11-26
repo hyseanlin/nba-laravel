@@ -101,7 +101,7 @@ class TeamsController extends Controller
         $team->home = $team->city . "球場";
         $team->save();
 
-        return view('teams.create');
+        return view('teams.create', $team->toArray());
     }
 
     public function edit($id)
