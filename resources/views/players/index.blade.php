@@ -21,6 +21,7 @@
             <th>國籍</th>
             <th>操作1</th>
             <th>操作2</th>
+            <th>操作3</th>
         </tr>
         @foreach($players as $player)
             <tr>
@@ -34,6 +35,13 @@
                 <td>{{ $player->nationality }}</td>
                 <td><a href="{{ route('players.show', ['id'=>$player->id]) }}">顯示</a></td>
                 <td><a href="{{ route('players.edit', ['id'=>$player->id]) }}">修改</a></td>
+                <td>
+                    <form action="{{ url('/players/delete', ['id' => $player->id]) }}" method="post">
+                        <input class="btn btn-default" type="submit" value="刪除" />
+                        @method('delete')
+                        @csrf
+                    </form>
+                </td>
             </tr>
         @endforeach
     </table>

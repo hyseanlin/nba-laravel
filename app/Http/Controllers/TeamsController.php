@@ -139,4 +139,11 @@ class TeamsController extends Controller
 
         return redirect('teams');
     }
+
+    public function destroy($id)
+    {
+        $team = Team::findOrFail($id);
+        $team->delete();
+        return redirect('teams');
+    }
 }

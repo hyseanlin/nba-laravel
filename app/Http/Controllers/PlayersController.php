@@ -99,4 +99,11 @@ class PlayersController extends Controller
 
         return redirect('players');
     }
+
+    public function destroy($id)
+    {
+        $player = Player::findOrFail($id);
+        $player->delete();
+        return redirect('players');
+    }
 }

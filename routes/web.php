@@ -39,6 +39,8 @@ Route::get('teams/{id}', [TeamsController::class, 'show'])->where('id', '[0-9]+'
 Route::get('teams/{id}/edit', [TeamsController::class, 'edit'])->where('id', '[0-9]+')->name('teams.edit');
 // 修改資料
 Route::patch('teams/update/{id}', [TeamsController::class, 'update'])->where('id', '[0-9]+')->name('teams.update');
+// 刪除資料
+Route::delete('teams/delete/{id}', [TeamsController::class, 'destroy'])->where('id', '[0-9]+')->name('teams.destroy');
 
 
 /*------------------------------------------
@@ -61,3 +63,5 @@ Route::get('players/{id}/edit', [PlayersController::class, 'edit'])->where('id',
 Route::post('players/store', [PlayersController::class, 'store'])->name('players.store');
 // 修改資料
 Route::patch('players/update/{id}', [PlayersController::class, 'update'])->where('id', '[0-9]+')->name('players.update');
+// 刪除資料
+Route::delete('players/delete/{id}', [PlayersController::class, 'destroy'])->where('id', '[0-9]+')->name('players.destroy');
