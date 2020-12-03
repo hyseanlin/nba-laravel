@@ -48,23 +48,7 @@ class PlayersController extends Controller
 
     public function create()
     {
-        $name = $this->generateRandomName();
-        $position = $this->generateRandomPosition();
-        $nationality = $this->generateRandomNationality();
-        $random_datetime = Carbon::now()->subMinutes(rand(1, 55));
-
-        $player = Player::create([
-            'name'=>$name,
-            'tid'=>rand(1, 25),
-            'position'=>$position,
-            'height'=>rand(165, 220),
-            'weight'=>rand(80, 120),
-            'year'=>rand(1, 15),
-            'nationality'=>$nationality,
-            'created_at'=>$random_datetime,
-            'updated_at'=>$random_datetime]);
-
-        return view('players.create', $player->toArray());
+        return view('players.create');
     }
 
     public function edit($id)
@@ -78,5 +62,41 @@ class PlayersController extends Controller
     {
         $player = Player::findOrFail($id)->toArray();
         return view('players.show', $player);
+    }
+
+    public function store(Request $request)
+    {
+        $name = $request->input('name');
+        $tid = $request->input('tid');
+        $position = $request->input('position');
+        $height = $request->input('height');
+        $weight = $request->input('weight');
+        $year = $request->input('year');
+        $nationality = $request->input('nationality');
+
+        $player = Player::create([
+            'name'=>$name,
+            'tid'=>$tid,
+            'position'=>$position,
+            'height'=>$height,
+            'weight'=>$weight,
+            'year'=>$year,
+            'nationality'=>$nationality]);
+        return redirect('players');
+    }
+    public function update($id, Request $request)
+    {
+        $player = Player::findOrFail($id);
+
+        $player->name = $request->input('name');
+        $player->tid = $request->input('tid');
+        $player->position = $request->input('position');
+        $player->height = $request->input('height');
+        $player->weight = $request->input('weight');
+        $player->year = $request->input('year');
+        $player->nationality = $request->input('nationality');
+        $player->save();
+
+        return redirect('players');
     }
 }

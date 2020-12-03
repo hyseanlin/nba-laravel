@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Team;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TeamsController extends Controller
@@ -94,14 +95,7 @@ class TeamsController extends Controller
 
     public function create()
     {
-        $team = new Team;
-        $team->name = $this->generateRandomName();
-        $team->zone = $this->generateRandomZone();
-        $team->city = $this->generateRandomCity();
-        $team->home = $team->city . "球場";
-        $team->save();
-
-        return view('teams.create', $team->toArray());
+        return view('teams.create');
     }
 
     public function edit($id)
@@ -114,5 +108,35 @@ class TeamsController extends Controller
     {
         $team = Team::findOrFail($id)->toArray();
         return view('teams.show', $team);
+    }
+
+    public function store(Request $request)
+    {
+        $name = $request->input('name');
+        $city = $request->input('city');
+        $home = $request->input('home');
+        $zone = $request->input('zone');
+
+        Team::create([
+            'name' => $name,
+            'city' => $city,
+            'home' => $home,
+            'zone' => $zone,
+            'created' => Carbon::now()
+        ]);
+
+        return redirect('teams');
+    }
+    public function update($id, Request $request)
+    {
+        $team = Team::findOrFail($id);
+
+        $team->name = $request->input('name');
+        $team->city = $request->input('city');
+        $team->home = $request->input('home');
+        $team->zone = $request->input('zone');
+        $team->save();
+
+        return redirect('teams');
     }
 }
