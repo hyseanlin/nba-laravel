@@ -5,44 +5,29 @@ namespace App\Http\Controllers;
 use App\Models\Player;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PlayersController extends Controller
 {
-    //
-    public function generateRandomString($length = 10) {
-        $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
-        }
-        return $randomString;
-    }
-    public function generateRandomName() {
-        $first_name = $this->generateRandomString(rand(2, 15));
-        $first_name = strtolower($first_name);
-        $first_name = ucfirst($first_name);
-        $last_name = $this->generateRandomString(rand(2, 15));
-        $last_name = strtolower($last_name);
-        $last_name = ucfirst($last_name);
-        $name = $first_name . " ". $last_name;
-        return $name;
-    }
-    public function generateRandomPosition() {
-        $positions = ['控球後衛', '得分後衛', '後衛', '前鋒', '小前鋒', '大前鋒','中鋒'];
-        return $positions[rand(0, count($positions)-1)];
-
-    }
-
-    public function generateRandomNationality() {
-        $positions = ['美國', '土耳其', '法國', '印度', '非洲', '中國', '塞爾維亞', '英國', '台灣'];
-        return $positions[rand(0, count($positions)-1)];
-
-    }
     public function index()
     {
-        $players = Player::all()->sortBy('id', SORT_ASC);
-
+        /*
+        $players = Player::all()
+            ->sortBy('players.id', SORT_ASC);
+        */
+        $players = DB::table('players')
+            ->join('teams', 'players.tid', '=', 'teams.id')
+            ->orderBy('players.id')
+            ->select(
+                'players.id',
+                'players.name as pname',
+                'teams.name as tname',
+                'players.position',
+                'players.height',
+                'players.weight',
+                'players.year',
+                'players.nationality'
+            )->get();
         return view('players.index', ['players' => $players]);
     }
 

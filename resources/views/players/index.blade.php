@@ -26,8 +26,8 @@
         @foreach($players as $player)
             <tr>
                 <td>{{ $player->id }}</td>
-                <td>{{ $player->name }}</td>
-                <td>{{ $player->tid }}</td>
+                <td>{{ $player->pname }}</td>
+                <td>{{ $player->tname }}</td>
                 <td>{{ $player->position }}</td>
                 <td>{{ $player->height }}</td>
                 <td>{{ $player->weight }}</td>
