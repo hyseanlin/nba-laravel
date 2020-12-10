@@ -12,19 +12,7 @@ class PlayersController extends Controller
 {
     public function index()
     {
-        $players = DB::table('players')
-            ->join('teams', 'players.tid', '=', 'teams.id')
-            ->orderBy('players.id')
-            ->select(
-                'players.id',
-                'players.name as pname',
-                'teams.name as tname',
-                'players.position',
-                'players.height',
-                'players.weight',
-                'players.year',
-                'players.nationality')
-            ->get();
+        $players = Player::allData()->get();
         return view('players.index', ['players' => $players]);
     }
 

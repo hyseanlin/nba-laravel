@@ -20,6 +20,21 @@ class Player extends Model
         'updated_at'
     ];
 
+    public function scopeAllData($query)
+    {
+        $query->join('teams', 'players.tid', '=', 'teams.id')
+            ->orderBy('players.id')
+            ->select(
+                'players.id',
+                'players.name as pname',
+                'teams.name as tname',
+                'players.position',
+                'players.height',
+                'players.weight',
+                'players.year',
+                'players.nationality');
+    }
+
     public function scopeSenior($query)
     {
         $query->join('teams', 'players.tid', '=', 'teams.id')
