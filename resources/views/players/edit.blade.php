@@ -5,7 +5,6 @@
 @section('nba_theme', '編輯中的球員')
 
 @section('nba_contents')
-    球員編號：{{ $player->id }}<br/>
     {!! Form::open(['url' => 'players/update/' . $player->id, 'method' => 'patch']) !!}
     <div class="form-group">
         {!! Form::label('name', '球員姓名：') !!}

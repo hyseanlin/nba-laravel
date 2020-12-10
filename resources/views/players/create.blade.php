@@ -5,7 +5,6 @@
 @section('nba_theme', '建立球員的表單')
 
 @section('nba_contents')
-
     {!! Form::open(['url' => 'players/store']) !!}
     <div class="form-group">
         {!! Form::label('name', '球員姓名：') !!}
@@ -39,5 +38,4 @@
         {!! Form::submit('新增球員', ['class'=>'btn btn-primary form-control']) !!}
     </div>
     {!! Form::close() !!}
-
 @endsection
