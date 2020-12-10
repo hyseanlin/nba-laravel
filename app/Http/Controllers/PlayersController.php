@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Player;
+use App\Models\Team;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -33,20 +34,43 @@ class PlayersController extends Controller
 
     public function create()
     {
-        return view('players.create');
+        $teams = DB::table('teams')
+            ->select('teams.id', 'teams.name')
+            ->orderBy('teams.id', 'asc')
+            ->get();
+
+        $data = [];
+        foreach ($teams as $team)
+        {
+            $data[$team->id] = $team->name;
+        }
+        return view('players.create', ['teams' =>$data]);
     }
 
     public function edit($id)
     {
-        $player = Player::findOrFail($id)->toArray();
+        $teams = DB::table('teams')
+            ->select('teams.id', 'teams.name')
+            ->orderBy('teams.id', 'asc')
+            ->get();
 
-        return view('players.edit', $player);
+        $data = [];
+        foreach ($teams as $team)
+        {
+            $data[$team->id] = $team->name;
+        }
+
+        $player = Player::findOrFail($id);
+
+        return view('players.edit', ['player' =>$player, 'teams' => $data]);
     }
 
     public function show($id)
     {
-        $player = Player::findOrFail($id)->toArray();
-        return view('players.show', $player);
+        $player = Player::findOrFail($id);
+        $team = Team::findOrFail($player->tid);
+
+        return view('players.show', ['player' => $player, 'team_name' => $team->name]);
     }
 
     public function store(Request $request)

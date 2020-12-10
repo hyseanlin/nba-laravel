@@ -13,7 +13,7 @@
     </div>
     <div class="form-group">
         {!! Form::label('tid', '球隊編號：') !!}
-        {!! Form::text('tid', null, ['class' => 'form-control']) !!}
+        {!! Form::select('tid', $teams, ['class' => 'form-control']) !!}
     </div>
     <div class="form-group">
         {!! Form::label('position', '球員位置：') !!}

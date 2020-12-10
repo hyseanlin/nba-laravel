@@ -6,12 +6,12 @@
 @section('nba_theme', '您所選取的球員資料')
 
 @section('nba_contents')
-球員編號：{{ $id }}<br/>
-球員姓名：{{ $name }}<br/>
-球隊編號：{{ $tid }}<br/>
-球員位置：{{ $position }}<br/>
-球員身高：{{ $height }}<br/>
-球員體重：{{ $weight }}<br/>
-球員年資：{{ $year }}<br/>
-球員國籍：{{ $nationality }}<br/>
+球員編號：{{ $player->id }}<br/>
+球員姓名：{{ $player->name }}<br/>
+球隊編號：{{ $team_name }}<br/>
+球員位置：{{ $player->position }}<br/>
+球員身高：{{ $player->height }}<br/>
+球員體重：{{ $player->weight }}<br/>
+球員年資：{{ $player->year }}<br/>
+球員國籍：{{ $player->nationality }}<br/>
 @endsection
