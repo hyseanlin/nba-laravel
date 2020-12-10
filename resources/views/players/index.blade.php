@@ -10,6 +10,12 @@
         <a href="{{ route('players.create') }} ">新增球員</a>
         <a href="{{ route('players.index') }} ">所有球員</a>
         <a href="{{ route('players.senior') }} ">資深球員</a>
+        <form action="{{ url('players/position') }}" method='POST'>
+            {!! Form::label('pos', '選取位置：') !!}
+            {!! Form::select('pos', $positions, ['class' => 'form-control']) !!}
+            <input class="btn btn-default" type="submit" value="查詢" />
+            @csrf
+        </form>
     </div>
     <table>
         <tr>

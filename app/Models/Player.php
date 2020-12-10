@@ -50,4 +50,25 @@ class Player extends Model
                 'players.year',
                 'players.nationality');
     }
+
+    public function scopeAllPositions($query)
+    {
+        $query->select('position')->groupBy('position');
+    }
+
+    public function scopePosition($query, $pos)
+    {
+        $query->join('teams', 'players.tid', '=', 'teams.id')
+            ->where('position', '=', $pos)
+            ->orderBy('year')
+            ->select(
+                'players.id',
+                'players.name as pname',
+                'teams.name as tname',
+                'players.position',
+                'players.height',
+                'players.weight',
+                'players.year',
+                'players.nationality');
+    }
 }

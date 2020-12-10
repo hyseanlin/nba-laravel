@@ -13,15 +13,40 @@ class PlayersController extends Controller
     public function index()
     {
         $players = Player::allData()->get();
-        return view('players.index', ['players' => $players]);
+
+        $positions = Player::allPositions()->get();
+        $data = [];
+        foreach ($positions as $position)
+        {
+            $data["$position->position"] = $position->position;
+        }
+        return view('players.index', ['players' => $players, 'positions'=>$data]);
     }
 
     public function senior()
     {
         $players = Player::senior()->get();
-        return view('players.index', ['players' => $players]);
+        $positions = Player::allPositions()->get();
+        $data = [];
+        foreach ($positions as $position)
+        {
+            $data["$position->position"] = $position->position;
+        }
+        return view('players.index', ['players' => $players, 'positions'=>$data]);
     }
 
+    public function position(Request $request)
+    {
+        $players = Player::position($request->input('pos'))->get();
+
+        $positions = Player::allPositions()->get();
+        $data = [];
+        foreach ($positions as $position)
+        {
+            $data["$position->position"] = $position->position;
+        }
+        return view('players.index', ['players' => $players, 'positions'=>$data]);
+    }
     public function create()
     {
         $teams = DB::table('teams')
