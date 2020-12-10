@@ -1,14 +1,15 @@
 @extends('app')
 
-@section('title', '所有球員')
+@section('title', 'NBA 球員')
 
-@section('nba_theme', 'NBA 所有球員')
+@section('nba_theme', 'NBA 球員')
 
 @section('nba_contents')
 
     <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
         <a href="{{ route('players.create') }} ">新增球員</a>
-        <a href="{{ route('players.senior') }} ">查詢資深球員</a>
+        <a href="{{ route('players.index') }} ">所有球員</a>
+        <a href="{{ route('players.senior') }} ">資深球員</a>
     </div>
     <table>
         <tr>

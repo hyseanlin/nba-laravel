@@ -19,7 +19,7 @@ class PlayersController extends Controller
     public function senior()
     {
         $players = Player::senior()->get();
-        return view('players.senior', ['players' => $players]);
+        return view('players.index', ['players' => $players]);
     }
 
     public function create()
