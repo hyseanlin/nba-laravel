@@ -22,6 +22,17 @@ class Player extends Model
 
     public function scopeSenior($query)
     {
-        $query->where('year', '>', 10)->orderBy('year');
+        $query->join('teams', 'players.tid', '=', 'teams.id')
+            ->where('year', '>', 10)
+            ->orderBy('year')
+            ->select(
+                'players.id',
+                'players.name as pname',
+                'teams.name as tname',
+                'players.position',
+                'players.height',
+                'players.weight',
+                'players.year',
+                'players.nationality');
     }
 }
