@@ -12,7 +12,7 @@
         {!! Form::text('name', null, ['class' => 'form-control']) !!}
     </div>
     <div class="form-group">
-        {!! Form::label('tid', '球隊編號：') !!}
+        {!! Form::label('tid', '所屬球隊：') !!}
         {!! Form::select('tid', $teams, ['class' => 'form-control']) !!}
     </div>
     <div class="form-group">
