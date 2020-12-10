@@ -3,80 +3,116 @@
 namespace App\Http\Controllers;
 
 use App\Models\Player;
+use App\Models\Team;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PlayersController extends Controller
 {
-    //
-    public function generateRandomString($length = 10) {
-        $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
-        }
-        return $randomString;
-    }
-    public function generateRandomName() {
-        $first_name = $this->generateRandomString(rand(2, 15));
-        $first_name = strtolower($first_name);
-        $first_name = ucfirst($first_name);
-        $last_name = $this->generateRandomString(rand(2, 15));
-        $last_name = strtolower($last_name);
-        $last_name = ucfirst($last_name);
-        $name = $first_name . " ". $last_name;
-        return $name;
-    }
-    public function generateRandomPosition() {
-        $positions = ['控球後衛', '得分後衛', '後衛', '前鋒', '小前鋒', '大前鋒','中鋒'];
-        return $positions[rand(0, count($positions)-1)];
-
-    }
-
-    public function generateRandomNationality() {
-        $positions = ['美國', '土耳其', '法國', '印度', '非洲', '中國', '塞爾維亞', '英國', '台灣'];
-        return $positions[rand(0, count($positions)-1)];
-
-    }
     public function index()
     {
-        $players = Player::all()->sortBy('id', SORT_ASC);
-
+        /*
+        $players = Player::all()
+            ->sortBy('players.id', SORT_ASC);
+        */
+        $players = DB::table('players')
+            ->join('teams', 'players.tid', '=', 'teams.id')
+            ->orderBy('players.id')
+            ->select(
+                'players.id',
+                'players.name as pname',
+                'teams.name as tname',
+                'players.position',
+                'players.height',
+                'players.weight',
+                'players.year',
+                'players.nationality'
+            )->get();
         return view('players.index', ['players' => $players]);
     }
 
     public function create()
     {
-        $name = $this->generateRandomName();
-        $position = $this->generateRandomPosition();
-        $nationality = $this->generateRandomNationality();
-        $random_datetime = Carbon::now()->subMinutes(rand(1, 55));
+        $teams = DB::table('teams')
+            ->select('teams.id', 'teams.name')
+            ->orderBy('teams.id', 'asc')
+            ->get();
 
-        $player = Player::create([
-            'name'=>$name,
-            'tid'=>rand(1, 25),
-            'position'=>$position,
-            'height'=>rand(165, 220),
-            'weight'=>rand(80, 120),
-            'year'=>rand(1, 15),
-            'nationality'=>$nationality,
-            'created_at'=>$random_datetime,
-            'updated_at'=>$random_datetime]);
-
-        return view('players.create', $player->toArray());
+        $data = [];
+        foreach ($teams as $team)
+        {
+            $data[$team->id] = $team->name;
+        }
+        return view('players.create', ['teams' =>$data]);
     }
 
     public function edit($id)
     {
-        $player = Player::findOrFail($id)->toArray();
+        $teams = DB::table('teams')
+            ->select('teams.id', 'teams.name')
+            ->orderBy('teams.id', 'asc')
+            ->get();
 
-        return view('players.edit', $player);
+        $data = [];
+        foreach ($teams as $team)
+        {
+            $data[$team->id] = $team->name;
+        }
+
+        $player = Player::findOrFail($id);
+
+        return view('players.edit', ['player' =>$player, 'teams' => $data]);
     }
 
     public function show($id)
     {
-        $player = Player::findOrFail($id)->toArray();
-        return view('players.show', $player);
+        $player = Player::findOrFail($id);
+        $team = Team::findOrFail($player->tid);
+
+        return view('players.show', ['player' => $player, 'team_name' => $team->name]);
+    }
+
+    public function store(Request $request)
+    {
+        $name = $request->input('name');
+        $tid = $request->input('tid');
+        $position = $request->input('position');
+        $height = $request->input('height');
+        $weight = $request->input('weight');
+        $year = $request->input('year');
+        $nationality = $request->input('nationality');
+
+        $player = Player::create([
+            'name'=>$name,
+            'tid'=>$tid,
+            'position'=>$position,
+            'height'=>$height,
+            'weight'=>$weight,
+            'year'=>$year,
+            'nationality'=>$nationality]);
+        return redirect('players');
+    }
+    public function update($id, Request $request)
+    {
+        $player = Player::findOrFail($id);
+
+        $player->name = $request->input('name');
+        $player->tid = $request->input('tid');
+        $player->position = $request->input('position');
+        $player->height = $request->input('height');
+        $player->weight = $request->input('weight');
+        $player->year = $request->input('year');
+        $player->nationality = $request->input('nationality');
+        $player->save();
+
+        return redirect('players');
+    }
+
+    public function destroy($id)
+    {
+        $player = Player::findOrFail($id);
+        $player->delete();
+        return redirect('players');
     }
 }

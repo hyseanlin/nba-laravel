@@ -17,6 +17,7 @@
             <th>主場</th>
             <th>操作1</th>
             <th>操作2</th>
+            <th>操作3</th>
         </tr>
         @foreach($teams as $team)
             @if ($team->zone == '西區')
@@ -28,6 +29,13 @@
                     <td>{{ $team->home }}</td>
                     <td><a href="{{ route('teams.show', ['id' => $team->id]) }}">顯示</a></td>
                     <td><a href="{{ route('teams.edit', ['id' => $team->id]) }}">修改</a></td>
+                    <td>
+                        <form action="{{ url('/teams/delete', ['id' => $team->id]) }}" method="post">
+                            <input class="btn btn-default" type="submit" value="刪除" />
+                            @method('delete')
+                            @csrf
+                        </form>
+                    </td>
                 </tr>
             @else
                 <tr style="color:blue;">
@@ -38,6 +46,13 @@
                     <td>{{ $team->home }}</td>
                     <td><a href="{{ route('teams.show', ['id' => $team->id]) }}">顯示</a></td>
                     <td><a href="{{ route('teams.edit', ['id' => $team->id]) }}">修改</a></td>
+                    <td>
+                        <form action="{{ url('/teams/delete', ['id' => $team->id]) }}" method="post">
+                            <input class="btn btn-default" type="submit" value="刪除" />
+                            @method('delete')
+                            @csrf
+                        </form>
+                    </td>
                 </tr>
             @endif
         @endforeach
