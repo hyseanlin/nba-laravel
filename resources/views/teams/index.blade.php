@@ -1,12 +1,15 @@
 @extends('app')
 
-@section('title', '所有球隊')
+@section('title', 'NBA 球隊')
 
-@section('nba_theme', 'NBA 所有球隊')
+@section('nba_theme', 'NBA 球隊')
 
 @section('nba_contents')
     <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
         <a href="{{ route('teams.create') }} ">新增球隊</a>
+        <a href="{{ route('teams.index') }} ">所有球隊</a>
+        <a href="{{ route('teams.western') }} ">西區球隊</a>
+        <a href="{{ route('teams.eastern') }} ">東區球隊</a>
     </div>
     <table>
         <tr>

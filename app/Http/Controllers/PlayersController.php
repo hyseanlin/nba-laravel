@@ -12,26 +12,41 @@ class PlayersController extends Controller
 {
     public function index()
     {
-        /*
-        $players = Player::all()
-            ->sortBy('players.id', SORT_ASC);
-        */
-        $players = DB::table('players')
-            ->join('teams', 'players.tid', '=', 'teams.id')
-            ->orderBy('players.id')
-            ->select(
-                'players.id',
-                'players.name as pname',
-                'teams.name as tname',
-                'players.position',
-                'players.height',
-                'players.weight',
-                'players.year',
-                'players.nationality'
-            )->get();
-        return view('players.index', ['players' => $players]);
+        $players = Player::allData()->get();
+
+        $positions = Player::allPositions()->get();
+        $data = [];
+        foreach ($positions as $position)
+        {
+            $data["$position->position"] = $position->position;
+        }
+        return view('players.index', ['players' => $players, 'positions'=>$data]);
     }
 
+    public function senior()
+    {
+        $players = Player::senior()->get();
+        $positions = Player::allPositions()->get();
+        $data = [];
+        foreach ($positions as $position)
+        {
+            $data["$position->position"] = $position->position;
+        }
+        return view('players.index', ['players' => $players, 'positions'=>$data]);
+    }
+
+    public function position(Request $request)
+    {
+        $players = Player::position($request->input('pos'))->get();
+
+        $positions = Player::allPositions()->get();
+        $data = [];
+        foreach ($positions as $position)
+        {
+            $data["$position->position"] = $position->position;
+        }
+        return view('players.index', ['players' => $players, 'positions'=>$data]);
+    }
     public function create()
     {
         $teams = DB::table('teams')

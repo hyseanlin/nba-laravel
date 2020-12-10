@@ -93,6 +93,18 @@ class TeamsController extends Controller
         return view('teams.index', ['teams'=>$teams]);
     }
 
+    public function western()
+    {
+        $teams = Team::zone('西區')->get();
+        return view('teams.index', ['teams'=>$teams]);
+    }
+
+    public function eastern()
+    {
+        $teams = Team::zone('東區')->get();
+        return view('teams.index', ['teams'=>$teams]);
+    }
+
     public function create()
     {
         return view('teams.create');
@@ -100,8 +112,8 @@ class TeamsController extends Controller
 
     public function edit($id)
     {
-        $team = Team::findOrFail($id)->toArray();
-        return view('teams.edit', $team);
+        $team = Team::findOrFail($id);
+        return view('teams.edit', ['team'=>$team]);
     }
 
     public function show($id)

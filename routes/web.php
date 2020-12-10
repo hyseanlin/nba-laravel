@@ -28,6 +28,10 @@ Route::get('/', function () {
  ----------------------------------------*/
 // 查詢
 Route::get('teams', [TeamsController::class, 'index'])->name('teams.index');
+// 查詢
+Route::get('teams/western', [TeamsController::class, 'western'])->name('teams.western');
+// 查詢
+Route::get('teams/eastern', [TeamsController::class, 'eastern'])->name('teams.eastern');
 // 新增表單
 Route::get('teams/create', [TeamsController::class, 'create'])->name('teams.create');
 // 新增資料
@@ -53,6 +57,10 @@ Route::delete('teams/delete/{id}', [TeamsController::class, 'destroy'])->where('
  ----------------------------------------*/
 // 查詢
 Route::get('players', [PlayersController::class, 'index'])->name('players.index');
+// 資深球員查詢
+Route::get('players/senior', [PlayersController::class, 'senior'])->name('players.senior');
+// 選定位置查詢球員
+Route::post('players/position', [PlayersController::class, 'position'])->name('players.position');
 // 新增表單
 Route::get('players/create', [PlayersController::class, 'create'])->name('players.create');
 // 顯示單筆球隊資料

@@ -15,4 +15,9 @@ class Team extends Model
         'zone',
         'created_at'
     ];
+
+    public function scopeZone($query, $zone)
+    {
+        $query->where('zone', '=', $zone);
+    }
 }
