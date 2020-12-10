@@ -19,4 +19,9 @@ class Player extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function scopeSenior($query)
+    {
+        $query->where('year', '>', 10)->orderBy('year');
+    }
 }
