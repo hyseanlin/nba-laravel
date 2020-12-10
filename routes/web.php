@@ -53,6 +53,8 @@ Route::delete('teams/delete/{id}', [TeamsController::class, 'destroy'])->where('
  ----------------------------------------*/
 // 查詢
 Route::get('players', [PlayersController::class, 'index'])->name('players.index');
+// 資深球員查詢
+Route::get('players/senior', [PlayersController::class, 'senior'])->name('players.senior');
 // 新增表單
 Route::get('players/create', [PlayersController::class, 'create'])->name('players.create');
 // 顯示單筆球隊資料

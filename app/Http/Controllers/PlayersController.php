@@ -12,10 +12,6 @@ class PlayersController extends Controller
 {
     public function index()
     {
-        /*
-        $players = Player::all()
-            ->sortBy('players.id', SORT_ASC);
-        */
         $players = DB::table('players')
             ->join('teams', 'players.tid', '=', 'teams.id')
             ->orderBy('players.id')
@@ -27,9 +23,15 @@ class PlayersController extends Controller
                 'players.height',
                 'players.weight',
                 'players.year',
-                'players.nationality'
-            )->get();
+                'players.nationality')
+            ->get();
         return view('players.index', ['players' => $players]);
+    }
+
+    public function senior()
+    {
+        $players = Player::where('year', '>', 10)->orderBy('year')->get();
+        return view('players.senior', ['players' => $players]);
     }
 
     public function create()
