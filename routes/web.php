@@ -28,6 +28,10 @@ Route::get('/', function () {
  ----------------------------------------*/
 // 查詢
 Route::get('teams', [TeamsController::class, 'index'])->name('teams.index');
+// 查詢
+Route::get('teams/western', [TeamsController::class, 'western'])->name('teams.western');
+// 查詢
+Route::get('teams/eastern', [TeamsController::class, 'eastern'])->name('teams.eastern');
 // 新增表單
 Route::get('teams/create', [TeamsController::class, 'create'])->name('teams.create');
 // 新增資料
