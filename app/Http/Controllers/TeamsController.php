@@ -100,8 +100,8 @@ class TeamsController extends Controller
 
     public function edit($id)
     {
-        $team = Team::findOrFail($id)->toArray();
-        return view('teams.edit', $team);
+        $team = Team::findOrFail($id);
+        return view('teams.edit', ['team'=>$team]);
     }
 
     public function show($id)
