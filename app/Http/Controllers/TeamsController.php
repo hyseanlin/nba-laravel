@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\CreateTeamRequest;
 use App\Models\Team;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -122,7 +123,7 @@ class TeamsController extends Controller
         return view('teams.show', $team);
     }
 
-    public function store(Request $request)
+    public function store(CreateTeamRequest $request)
     {
         $name = $request->input('name');
         $city = $request->input('city');
@@ -139,7 +140,7 @@ class TeamsController extends Controller
 
         return redirect('teams');
     }
-    public function update($id, Request $request)
+    public function update($id, CreateTeamRequest $request)
     {
         $team = Team::findOrFail($id);
 
