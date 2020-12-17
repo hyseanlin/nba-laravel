@@ -24,11 +24,24 @@ class CreateTeamRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:100',
-            'zone' => 'required|max:100',
-            'city' => 'required|max:100',
-            'home' => 'required|max:100'
+            'name' => 'required|string|min:2|max:100',
+            'zone' => 'required|string|min:2|max:100',
+            'city' => 'required|string|min:2|max:100',
+            'home' => 'required|string|min:2|max:100'
         ];
     }
 
+    public function messages()
+    {
+        return [
+            "name.required" => "球隊名稱 為必填",
+            "name.min" => "球隊名稱 至少需2個字元",
+            "zone.required" => "分區 為必填",
+            "zone.min" => "分區 至少需2個字元",
+            "city.required" => "城市 為必填",
+            "city.min" => "城市 至少需2個字元",
+            "home.required" => "主場 為必填",
+            "home.min" => "主場 至少需2個字元",
+        ];
+    }
 }
