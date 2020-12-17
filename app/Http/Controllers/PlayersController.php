@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreatePlayerRequest;
 use App\Models\Player;
 use App\Models\Team;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class PlayersController extends Controller
@@ -88,7 +88,7 @@ class PlayersController extends Controller
         return view('players.show', ['player' => $player, 'team_name' => $team->name]);
     }
 
-    public function store(Request $request)
+    public function store(CreatePlayerRequest $request)
     {
         $name = $request->input('name');
         $tid = $request->input('tid');
@@ -108,7 +108,7 @@ class PlayersController extends Controller
             'nationality'=>$nationality]);
         return redirect('players');
     }
-    public function update($id, Request $request)
+    public function update($id, CreatePlayerRequest $request)
     {
         $player = Player::findOrFail($id);
 

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateTeamRequest;
 use App\Models\Team;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class TeamsController extends Controller
 {
