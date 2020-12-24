@@ -6,6 +6,7 @@ use App\Http\Requests\CreatePlayerRequest;
 use App\Models\Player;
 use App\Models\Team;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class PlayersController extends Controller

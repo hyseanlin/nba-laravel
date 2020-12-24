@@ -17,6 +17,8 @@ class CreatePlayersTable extends Migration
             $table->id()->comment('編號');
             $table->string('name')->comment('姓名');
             $table->foreignId('tid')->comment('球隊編號');
+            $table->date('birthdate')->default('1916-01-01')->nullable()->comment('生日');;
+            $table->date('onboarddate')->default('1946-06-06')->nullable()->comment('到職日');;
             $table->string('position')->comment('位置');
             $table->float('height')->comment('身高');
             $table->float('weight')->comment('體重');
