@@ -28,7 +28,7 @@ class CreatePlayerRequest extends FormRequest
             'tid' => 'required',
             'position' => 'required|string|min:2|max:191',
             'height' => 'required|numeric|min:160|max:250',
-            'weight' => 'required|numeric|min:70|max:200',
+            'weight' => 'required|numeric|min:70|max:180|lt:height', // lt = less than, lg = larger than
             'year' => 'required|numeric|min:0|max:20',
             'nationality' => 'required|string|min:2|max:191'
         ];
@@ -50,7 +50,8 @@ class CreatePlayerRequest extends FormRequest
             "year.required" => "球員年資 為必填",
             "year.min" => "球員年資 範圍必須介於0~20之間",
             "year.max" => "球員年資 範圍必須介於0~20之間",
-            "nationality.required" => "球員國籍 為必填"
+            "nationality.required" => "球員國籍 為必填",
+            "weight.lt" => "身高 必須大於 體重"
         ];
     }
 }
