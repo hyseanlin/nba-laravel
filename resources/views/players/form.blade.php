@@ -7,6 +7,14 @@
     {!! Form::select('tid', $teams, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
+    {!! Form::label('birthdate','出生年月日:') !!}
+    {!! Form::date('birthdate',null ,['class'=>'form-control']) !!}
+</div>
+<div class="form-group">
+    {!! Form::label('onboarddate','到職日:') !!}
+    {!! Form::date('onboarddate',null ,['class'=>'form-control']) !!}
+</div>
+<div class="form-group">
     {!! Form::label('position', '球員位置：') !!}
     {!! Form::text('position', null, ['class' => 'form-control']) !!}
 </div>

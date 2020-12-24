@@ -51,9 +51,13 @@ class PlayersTableSeeder extends Seeder
             $position = $this->generateRandomPosition();
             $nationality = $this->generateRandomNationality();
             $random_datetime = Carbon::now()->subMinutes(rand(1, 55));
+            $birthdate = Carbon::now()->subYears(rand(48, 60))->subMonths(rand(0, 12))->subRealDays(rand(0,31));
+            $onboarddate = Carbon::now()->subYears(rand(18, 30))->subMonths(rand(0, 12))->subRealDays(rand(0,31));
             DB::table('players')->insert([
                 'name' => $name,
                 'tid' => rand(1, 25),
+                'birthdate' => $birthdate,
+                'onboarddate' => $onboarddate,
                 'position' => $position,
                 'height' => rand(165, 220),
                 'weight' => rand(80, 120),

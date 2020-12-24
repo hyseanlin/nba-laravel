@@ -22,6 +22,8 @@
             <th>球員編號</th>
             <th>姓名</th>
             <th>所屬球隊</th>
+            <th>生日</th>
+            <th>到職日</th>
             <th>位置</th>
             <th>身高</th>
             <th>體重</th>
@@ -36,6 +38,8 @@
                 <td>{{ $player->id }}</td>
                 <td>{{ $player->pname }}</td>
                 <td>{{ $player->tname }}</td>
+                <td>{{ $player->birthdate }}</td>
+                <td>{{ $player->onboarddate }}</td>
                 <td>{{ $player->position }}</td>
                 <td>{{ $player->height }}</td>
                 <td>{{ $player->weight }}</td>
