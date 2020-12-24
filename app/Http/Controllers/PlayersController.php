@@ -13,8 +13,7 @@ class PlayersController extends Controller
 {
     public function index()
     {
-        $players = Player::allData()->get();
-
+        $players = Player::all();
         $positions = Player::allPositions()->get();
         $data = [];
         foreach ($positions as $position)

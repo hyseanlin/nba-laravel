@@ -36,8 +36,8 @@
         @foreach($players as $player)
             <tr>
                 <td>{{ $player->id }}</td>
-                <td>{{ $player->pname }}</td>
-                <td>{{ $player->tname }}</td>
+                <td>{{ $player->name }}</td>
+                <td>{{ $player->team->name }}</td>
                 <td>{{ $player->birthdate }}</td>
                 <td>{{ $player->onboarddate }}</td>
                 <td>{{ $player->position }}</td>
