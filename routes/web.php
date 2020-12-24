@@ -15,7 +15,7 @@ use App\Http\Controllers\PlayersController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('players');
 });
 
 /*------------------------------------------
