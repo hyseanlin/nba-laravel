@@ -118,8 +118,9 @@ class TeamsController extends Controller
 
     public function show($id)
     {
-        $team = Team::findOrFail($id)->toArray();
-        return view('teams.show', $team);
+        $team = Team::findOrFail($id);
+        $players = $team->players;
+        return view('teams.show', ['team'=>$team, 'players'=>$players]);
     }
 
     public function store(CreateTeamRequest $request)

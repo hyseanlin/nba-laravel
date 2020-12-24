@@ -20,4 +20,9 @@ class Team extends Model
     {
         $query->where('zone', '=', $zone);
     }
+
+    public function players()
+    {
+        return $this->hasMany('App\Models\Player', 'tid');
+    }
 }
