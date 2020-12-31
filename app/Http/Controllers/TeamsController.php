@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateTeamRequest;
 use App\Models\Team;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class TeamsController extends Controller
 {
@@ -97,6 +98,27 @@ class TeamsController extends Controller
     {
         return Team::all();
     }
+
+    public function delete(Request $request)
+    {
+        $team = Team::find($request->input('id'));
+
+        if ($team == null)
+        {
+            return response()->json([
+                'status' => 0,
+            ]);
+        }
+
+        if ($team->delete())
+        {
+            return response()->json([
+                'status' => 1,
+            ]);
+        }
+
+    }
+
     public function western()
     {
         $teams = Team::zone('西區')->get();

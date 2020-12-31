@@ -27,6 +27,25 @@ class PlayersController extends Controller
     {
         return Player::all();
     }
+
+    public function delete(Request $request)
+    {
+        $player = Player::find($request->input('id'));
+
+        if ($player == null)
+        {
+            return response()->json([
+                'status' => 0,
+            ]);
+        }
+
+        if ($player->delete())
+        {
+            return response()->json([
+                'status' => 1,
+            ]);
+        }
+    }
     public function senior()
     {
         $players = Player::senior()->get();

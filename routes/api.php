@@ -22,7 +22,13 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login',  [AuthController::class, 'login']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
+    // 查詢所有球隊
     Route::get('teams', [TeamsController::class, 'teams']);
+    // 刪除指定球隊
+    Route::delete('teams', [TeamsController::class, 'delete']);
+    // 查詢所有球員
     Route::get('players', [PlayersController::class, 'players']);
+    // 刪除指定球員
+    Route::delete('players', [PlayersController::class, 'delete']);
 
 });
