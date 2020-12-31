@@ -46,6 +46,7 @@ Route::patch('teams/update/{id}', [TeamsController::class, 'update'])->where('id
 // 刪除資料
 Route::delete('teams/delete/{id}', [TeamsController::class, 'destroy'])->where('id', '[0-9]+')->name('teams.destroy');
 
+Route::get('/getCSRFToken', function() { return csrf_token(); }); // csrf = cross-site request forgery (跨站請求偽造)
 
 /*------------------------------------------
  * 建立 NBA 「球員(players)」資源的所有 routing 及 view
