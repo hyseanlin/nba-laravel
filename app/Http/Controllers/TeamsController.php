@@ -94,12 +94,38 @@ class TeamsController extends Controller
         return view('teams.index', ['teams'=>$teams]);
     }
 
-    public function teams()
+    public function api_teams()
     {
         return Team::all();
     }
 
-    public function delete(Request $request)
+    public function api_update(Request $request)
+    {
+        $team = Team::find($request->input('id'));
+        if ($team == null)
+        {
+            return response()->json([
+                'status' => 0,
+            ]);
+        }
+
+        $team->name = $request->input('name');
+        $team->city = $request->input('city');
+        $team->home = $request->input('home');
+        $team->zone = $request->input('zone');
+        if ($team->save())
+        {
+            return response()->json([
+                'status' => 1,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 0,
+            ]);
+        }
+    }
+
+    public function api_delete(Request $request)
     {
         $team = Team::find($request->input('id'));
 

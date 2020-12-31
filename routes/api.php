@@ -23,12 +23,16 @@ Route::post('login',  [AuthController::class, 'login']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     // 查詢所有球隊
-    Route::get('teams', [TeamsController::class, 'teams']);
+    Route::get('teams', [TeamsController::class, 'api_teams']);
+    // 修改指定球隊
+    Route::patch('teams', [TeamsController::class, 'api_update']);
     // 刪除指定球隊
-    Route::delete('teams', [TeamsController::class, 'delete']);
+    Route::delete('teams', [TeamsController::class, 'api_delete']);
     // 查詢所有球員
-    Route::get('players', [PlayersController::class, 'players']);
+    Route::get('players', [PlayersController::class, 'api_players']);
+    // 修改指定球員
+    Route::patch('players', [PlayersController::class, 'api_update']);
     // 刪除指定球員
-    Route::delete('players', [PlayersController::class, 'delete']);
+    Route::delete('players', [PlayersController::class, 'api_delete']);
 
 });
