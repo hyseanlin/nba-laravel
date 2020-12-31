@@ -23,6 +23,10 @@ class PlayersController extends Controller
         return view('players.index', ['players' => $players, 'positions'=>$data]);
     }
 
+    public function players()
+    {
+        return Player::all();
+    }
     public function senior()
     {
         $players = Player::senior()->get();
