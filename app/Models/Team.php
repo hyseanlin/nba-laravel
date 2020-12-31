@@ -25,4 +25,10 @@ class Team extends Model
     {
         return $this->hasMany('App\Models\Player', 'tid');
     }
+
+    public function delete()
+    {
+        $this->players()->delete();
+        return parent::delete();
+    }
 }
