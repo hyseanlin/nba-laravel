@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Schema::defaultStringLength(191);
+        Paginator::defaultView('vendor.pagination.semantic-ui');
 
         Validator::extend('dateearlier', function($attribute, $value, $parameters, $validator) {
             $date_compare = \Arr::get($validator->getData(), $parameters[0]);

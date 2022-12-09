@@ -57,5 +57,7 @@
             </tr>
         @endforeach
     </table>
-
+    @if ($players == null)
+        {{ $players->links() }}
+    @endif
 @endsection
