@@ -19,8 +19,8 @@ class PlayersController extends Controller
         foreach ($positions as $position)
         {
             $data["$position->position"] = $position->position;
-        }
-        return view('players.index', ['players' => $players, 'positions'=>$data]);
+        }        
+        return view('players.index', ['players' => $players, 'positions'=>$data, 'showPagination' => true]);
     }
 
     public function api_players()
@@ -85,7 +85,7 @@ class PlayersController extends Controller
         {
             $data["$position->position"] = $position->position;
         }
-        return view('players.index', ['players' => $players, 'positions'=>$data]);
+        return view('players.index', ['players' => $players, 'positions'=>$data, 'showPagination' => false]);
     }
 
     public function position(Request $request)
@@ -98,7 +98,7 @@ class PlayersController extends Controller
         {
             $data["$position->position"] = $position->position;
         }
-        return view('players.index', ['players' => $players, 'positions'=>$data]);
+        return view('players.index', ['players' => $players, 'positions'=>$data, 'showPagination' => false]);
     }
     public function create()
     {

@@ -57,7 +57,7 @@
             </tr>
         @endforeach
     </table>
-    @if ($players == null)
+    @if ($showPagination)
         {{ $players->links() }}
     @endif
 @endsection
