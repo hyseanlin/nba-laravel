@@ -14,13 +14,8 @@ class PlayersController extends Controller
     public function index()
     {
         $players = Player::paginate(25); //Player::all();
-        $positions = Player::allPositions()->get();
-        $data = [];
-        foreach ($positions as $position)
-        {
-            $data["$position->position"] = $position->position;
-        }        
-        return view('players.index', ['players' => $players, 'positions'=>$data, 'showPagination' => true]);
+        $positions = Player::allPositions()->pluck('players.position', 'players.position');
+        return view('players.index', ['players' => $players, 'positions'=>$positions, 'showPagination' => false]);
     }
 
     public function api_players()
@@ -79,26 +74,15 @@ class PlayersController extends Controller
     public function senior()
     {
         $players = Player::senior()->get();
-        $positions = Player::allPositions()->get();
-        $data = [];
-        foreach ($positions as $position)
-        {
-            $data["$position->position"] = $position->position;
-        }
-        return view('players.index', ['players' => $players, 'positions'=>$data, 'showPagination' => false]);
+        $positions = Player::allPositions()->pluck('players.position', 'players.position');
+        return view('players.index', ['players' => $players, 'positions'=>$positions, 'showPagination' => false]);
     }
 
     public function position(Request $request)
     {
         $players = Player::position($request->input('pos'))->get();
-
-        $positions = Player::allPositions()->get();
-        $data = [];
-        foreach ($positions as $position)
-        {
-            $data["$position->position"] = $position->position;
-        }
-        return view('players.index', ['players' => $players, 'positions'=>$data, 'showPagination' => false]);
+        $positions = Player::allPositions()->pluck('players.position', 'players.position');
+        return view('players.index', ['players' => $players, 'positions'=>$positions, 'showPagination' => false]);
     }
     public function create()
     {

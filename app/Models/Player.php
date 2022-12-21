@@ -32,7 +32,7 @@ class Player extends Model
     }
 
     public function scopeAllPositions($query)
-    {
+    { 
         $query->select('position')->groupBy('position');
     }
 
