@@ -15,7 +15,7 @@ class PlayersController extends Controller
     {
         $players = Player::paginate(25); //Player::all();
         $positions = Player::allPositions()->pluck('players.position', 'players.position');
-        return view('players.index', ['players' => $players, 'positions'=>$positions, 'showPagination' => false]);
+        return view('players.index', ['players' => $players, 'positions'=>$positions]);
     }
 
     public function api_players()
@@ -73,16 +73,16 @@ class PlayersController extends Controller
     }
     public function senior()
     {
-        $players = Player::senior()->get();
+        $players = Player::senior()->paginate(25);
         $positions = Player::allPositions()->pluck('players.position', 'players.position');
-        return view('players.index', ['players' => $players, 'positions'=>$positions, 'showPagination' => false]);
+        return view('players.index', ['players' => $players, 'positions'=>$positions]);
     }
 
     public function position(Request $request)
     {
-        $players = Player::position($request->input('pos'))->get();
+        $players = Player::position($request->input('pos'))->paginate(25);
         $positions = Player::allPositions()->pluck('players.position', 'players.position');
-        return view('players.index', ['players' => $players, 'positions'=>$positions, 'showPagination' => false]);
+        return view('players.index', ['players' => $players, 'positions'=>$positions]);
     }
     public function create()
     {
