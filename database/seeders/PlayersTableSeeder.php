@@ -33,21 +33,46 @@ class PlayersTableSeeder extends Seeder
         return $name;
     }
     public function generateRandomPosition() {
-        $positions = ['控球後衛', '得分後衛', '後衛', '前鋒', '小前鋒', '大前鋒','中鋒'];
+        $positions = array();
+        $positions[] = 'Point Guard (PG)';
+        $positions[] = 'Shooting Guard (SG)';  
+        $positions[] = 'Small Forward (SF)';
+        $positions[] = 'Power Forward (PF)';
+        $positions[] = 'Center (C)';
         return $positions[rand(0, count($positions)-1)];
-
     }
 
     public function generateRandomNationality() {
-        $positions = ['美國', '土耳其', '法國', '印度', '非洲', '中國', '塞爾維亞', '英國', '台灣'];
-        return $positions[rand(0, count($positions)-1)];
+        $nationalities = array();
+
+        $nationalities[] = 'United States';
+        $nationalities[] = 'Canada';
+        $nationalities[] = 'France';
+        $nationalities[] = 'Germany';
+        $nationalities[] = 'Australia';
+        $nationalities[] = 'Serbia';  
+        $nationalities[] = 'Nigeria';
+        $nationalities[] = 'Greece';
+        $nationalities[] = 'Slovenia';
+        $nationalities[] = 'Spain';
+        $nationalities[] = 'Argentina';
+        $nationalities[] = 'Brazil';
+        $nationalities[] = 'Dominican Republic';
+        $nationalities[] = 'Croatia';
+        $nationalities[] = 'Turkey';
+        $nationalities[] = 'Latvia';
+
+        return $nationalities[rand(0, count($nationalities)-1)];
 
     }
+
     public function run()
     {
+        $firstNames = array('John', 'Mary', 'James', 'Elizabeth', 'Robert', 'Jennifer', 'Michael', 'Linda', 'William', 'Barbara', 'David', 'Patricia', 'Richard', 'Jessica', 'Joseph', 'Susan', 'Thomas', 'Margaret', 'Charles', 'Sarah', 'Christopher', 'Karen', 'Daniel', 'Nancy', 'Matthew', 'Lisa', 'Anthony', 'Betty', 'Mark', 'Dorothy', 'Donald', 'Sandra', 'Steven', 'Ashley', 'Paul', 'Kimberly', 'Andrew', 'Emily', 'Joshua', 'Donna', 'Kenneth', 'Michelle', 'Kevin', 'Carol', 'Brian', 'Amanda', 'George', 'Melissa', 'Edward', 'Deborah', 'Ronald', 'Stephanie', 'Timothy', 'Rebecca', 'Jason', 'Laura', 'Jeffrey', 'Helen', 'Ryan', 'Sharon', 'Jacob', 'Cynthia', 'Gary', 'Kathleen', 'Nicholas', 'Amy', 'Eric', 'Shirley', 'Jonathan', 'Angela', 'Stephen', 'Anna', 'Larry', 'Brenda', 'Justin', 'Pamela', 'Scott', 'Nicole', 'Brandon', 'Emma', 'Benjamin', 'Samantha', 'Samuel', 'Katherine', 'Gregory', 'Christine', 'Frank', 'Debra', 'Alexander', 'Rachel', 'Raymond', 'Catherine', 'Patrick', 'Carolyn', 'Jack', 'Janet', 'Dennis', 'Ruth', 'Jerry', 'Maria', 'Tyler', 'Heather', 'Aaron', 'Diane', 'Jose', 'Virginia', 'Adam', 'Julie', 'Henry', 'Joyce', 'Nathan', 'Victoria', 'Douglas', 'Olivia', 'Zachary', 'Kelly', 'Peter', 'Christina', 'Kyle', 'Lauren', 'Walter', 'Joan', 'Ethan', 'Evelyn', 'Jeremy', 'Judith', 'Harold', 'Megan', 'Christian', 'Cheryl', 'Noah', 'Andrea', 'Gerald', 'Hannah', 'Keith', 'Martha', 'Roger', 'Jacqueline', 'Arthur', 'Frances', 'Lawrence', 'Gloria', 'Dylan', 'Teresa', 'Austin', 'Kathryn', 'Joe', 'Sara', 'Jesse', 'Janice', 'Albert', 'Jean', 'Bryan', 'Alice', 'Billy', 'Doris', 'Bruce', 'Abigail', 'Willie', 'Julia', 'Jordan', 'Judy', 'Alan', 'Rose', 'Ralph', 'Ann', 'Roy', 'Beverly', 'Juan', 'Denise', 'Wayne', 'Amber');
+        $lastNames = array('Smith', 'Johnson', 'Williams', 'Jones', 'Brown', 'Davis', 'Miller', 'Wilson', 'Moore', 'Taylor', 'Anderson', 'Thomas', 'Jackson', 'White', 'Harris', 'Martin', 'Thompson', 'Garcia', 'Martinez', 'Robinson', 'Clark', 'Rodriguez', 'Lewis', 'Lee', 'Walker', 'Hall', 'Allen', 'Young', 'Hernandez', 'King', 'Wright', 'Lopez', 'Hill', 'Scott', 'Green', 'Adams', 'Baker', 'Gonzalez', 'Nelson', 'Carter', 'Mitchell', 'Perez', 'Roberts', 'Turner', 'Phillips', 'Campbell', 'Parker', 'Evans', 'Edwards', 'Collins', 'Stewart', 'Sanchez', 'Morris', 'Rogers', 'Reed', 'Cook', 'Morgan', 'Bell', 'Murphy', 'Bailey', 'Rivera', 'Cooper', 'Richardson', 'Cox', 'Howard', 'Ward', 'Torres', 'Peterson', 'Gray', 'Ramirez', 'James', 'Watson', 'Brooks', 'Kelly', 'Sanders', 'Price', 'Bennett', 'Wood', 'Barnes', 'Ross', 'Henderson', 'Coleman', 'Jenkins', 'Perry', 'Powell', 'Long', 'Patterson', 'Hughes', 'Flores', 'Washington', 'Butler', 'Simmons', 'Foster', 'Gonzales', 'Bryant', 'Alexander', 'Russell', 'Griffin', 'Diaz', 'Hayes');  
         for ($i=0; $i<500; $i++)
         {
-            $name = $this->generateRandomName();
+            $name = $firstNames[array_rand($firstNames)] . ' ' . $lastNames[array_rand($lastNames)];
             $position = $this->generateRandomPosition();
             $nationality = $this->generateRandomNationality();
             $random_datetime = Carbon::now()->subMinutes(rand(1, 55));

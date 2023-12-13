@@ -147,13 +147,13 @@ class TeamsController extends Controller
 
     public function western()
     {
-        $teams = Team::zone('西區')->get();
+        $teams = Team::zone('Western Conference')->get();
         return view('teams.index', ['teams'=>$teams]);
     }
 
     public function eastern()
     {
-        $teams = Team::zone('東區')->get();
+        $teams = Team::zone('Eastern Conference')->get();
         return view('teams.index', ['teams'=>$teams]);
     }
 

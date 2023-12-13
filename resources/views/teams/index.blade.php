@@ -23,7 +23,7 @@
             <th>操作3</th>
         </tr>
         @foreach($teams as $team)
-            @if ($team->zone == '西區')
+            @if ($team->zone == 'Western Conference')
                 <tr style="color:red;">
                     <td>{{ $team->id }}</td>
                     <td>{{ $team->name }}</td>
