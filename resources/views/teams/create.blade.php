@@ -1,12 +1,20 @@
-@extends('app')
+@extends('layouts.app')
 
-@section('title', '建立球隊表單')
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Dashboard') }}</div>
 
-@section('nba_theme', '建立球隊的表單')
-
-@section('nba_contents')
-    @include('message.list')
-    {!! Form::open(['url' => 'teams/store']) !!}
-    @include('teams.form', ['submitButtonText'=>'新增球隊資料'])
-    {!! Form::close() !!}
+                <div class="card-body">
+                    @include('message.list')
+                    {!! Form::open(['url' => 'teams/store']) !!}
+                    @include('teams.form', ['submitButtonText'=>'新增球隊資料'])
+                    {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
