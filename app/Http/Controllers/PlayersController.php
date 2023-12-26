@@ -8,6 +8,7 @@ use App\Models\Team;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class PlayersController extends Controller
 {
@@ -92,6 +93,8 @@ class PlayersController extends Controller
 
     public function edit($id)
     {
+        parent::edit($id);
+
         $player = Player::findOrFail($id);
         $tags = Team::orderBy('teams.id', 'asc')->pluck('teams.name', 'teams.id');
         $selected_tags = $player->team->id;
@@ -128,6 +131,9 @@ class PlayersController extends Controller
     }
     public function update($id, CreatePlayerRequest $request)
     {
+        if (Gate::allows('user'))
+            abort(401);
+
         $player = Player::findOrFail($id);
 
         $player->name = $request->input('name');

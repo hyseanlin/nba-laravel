@@ -5,6 +5,7 @@ use App\Http\Requests\CreateTeamRequest;
 use App\Models\Team;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class TeamsController extends Controller
 {
@@ -164,6 +165,8 @@ class TeamsController extends Controller
 
     public function edit($id)
     {
+        parent::edit($id);
+
         $team = Team::findOrFail($id);
         return view('teams.edit', ['team'=>$team]);
     }
@@ -194,6 +197,9 @@ class TeamsController extends Controller
     }
     public function update($id, CreateTeamRequest $request)
     {
+        if (Gate::allows('user'))
+            abort(401);
+
         $team = Team::findOrFail($id);
 
         $team->name = $request->input('name');
