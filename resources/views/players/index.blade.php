@@ -7,7 +7,9 @@
 @section('nba_contents')
 
     <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
+        @can('admin')
         <a href="{{ route('players.create') }} ">新增球員</a>
+        @endcan
         <a href="{{ route('players.index') }} ">所有球員</a>
         <a href="{{ route('players.senior') }} ">資深球員</a>
         <form action="{{ url('players/position') }}" method='POST'>
@@ -30,8 +32,12 @@
             <th>年資</th>
             <th>國籍</th>
             <th>操作1</th>
+            @can('admin')
             <th>操作2</th>
             <th>操作3</th>
+            @elsecan('manager')
+            <th>操作2</th>
+            @endcan
         </tr>
         @foreach($players as $player)
             <tr>
@@ -46,6 +52,7 @@
                 <td>{{ $player->year }}</td>
                 <td>{{ $player->nationality }}</td>
                 <td><a href="{{ route('players.show', ['id'=>$player->id]) }}">顯示</a></td>
+                @can('admin')
                 <td><a href="{{ route('players.edit', ['id'=>$player->id]) }}">修改</a></td>
                 <td>
                     <form action="{{ url('/players/delete', ['id' => $player->id]) }}" method="post">
@@ -54,6 +61,9 @@
                         @csrf
                     </form>
                 </td>
+                @elsecan('manager')
+                <td><a href="{{ route('players.edit', ['id'=>$player->id]) }}">修改</a></td>    
+                @endcan
             </tr>
         @endforeach
     </table>
