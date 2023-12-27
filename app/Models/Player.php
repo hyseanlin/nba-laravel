@@ -27,18 +27,18 @@ class Player extends Model
 
     public function scopeSenior($query)
     {
-        $query->where('year', '>', 10)
-            ->orderBy('year');
+        return $query->where('year', '>', 10)
+                ->orderBy('year');
     }
 
     public function scopeAllPositions($query)
     { 
-        $query->select('position')->groupBy('position');
+        return $query->select('position')->groupBy('position');
     }
 
     public function scopePosition($query, $pos)
     {
-        $query->where('position', '=', $pos)
+        return $query->where('position', '=', $pos)
             ->orderBy('year');
     }
 }
