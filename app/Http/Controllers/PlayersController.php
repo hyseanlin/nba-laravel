@@ -112,22 +112,16 @@ class PlayersController extends Controller
 
     public function store(CreatePlayerRequest $request)
     {
-        $name = $request->input('name');
-        $tid = $request->input('tid');
-        $position = $request->input('position');
-        $height = $request->input('height');
-        $weight = $request->input('weight');
-        $year = $request->input('year');
-        $nationality = $request->input('nationality');
-
-        $player = Player::create([
-            'name'=>$name,
-            'tid'=>$tid,
-            'position'=>$position,
-            'height'=>$height,
-            'weight'=>$weight,
-            'year'=>$year,
-            'nationality'=>$nationality]);
+        $data = $request->only([
+            'name',
+            'tid',
+            'position',
+            'height',
+            'weight',
+            'year',
+            'nationality',            
+        ]);        
+        $observation = Player::create($data);
         return redirect('players');
     }
     public function update($id, CreatePlayerRequest $request)
@@ -137,13 +131,18 @@ class PlayersController extends Controller
 
         $player = Player::findOrFail($id);
 
-        $player->name = $request->input('name');
-        $player->tid = $request->input('tid');
-        $player->position = $request->input('position');
-        $player->height = $request->input('height');
-        $player->weight = $request->input('weight');
-        $player->year = $request->input('year');
-        $player->nationality = $request->input('nationality');
+        $data = $request->only([
+            'name',
+            'tid',
+            'position',
+            'height',
+            'weight',
+            'year',
+            'nationality',            
+        ]);    
+
+        $player->fill($data);
+
         $player->save();
 
         return redirect('players');
